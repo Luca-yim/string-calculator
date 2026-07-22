@@ -43,4 +43,24 @@ test('add of ten numbers returns their sum', () => {
   expect(c.add('1,2,3,4,5,6,7,8,9,10')).toBe(55);
 });
 
+test('add("1\\n2,3") returns 6', () => {
+  const c = new Calculator();
+  expect(c.add('1\n2,3')).toBe(6);
+});
+
+test('add("1\\n2\\n3") returns 6', () => {
+  const c = new Calculator();
+  expect(c.add('1\n2\n3')).toBe(6);
+});
+
+test('add("1,\\n") returns 1 (trailing separator ignored)', () => {
+  const c = new Calculator();
+  expect(c.add('1,\n')).toBe(1);
+});
+
+test('add("0,1") returns 1 (zero handled correctly)', () => {
+  const c = new Calculator();
+  expect(c.add('0,1')).toBe(1);
+});
+
 runTests();

@@ -12,3 +12,6 @@ Follows [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://sem
 - Test coverage for arbitrary-count number lists
 - Newlines (`\n`) accepted as number separators alongside commas
 - Graceful handling of trailing delimiters
+- Custom delimiter support via `//[delimiter]\n` header
+- Regex-escaping for delimiters (handles special characters like `.` and `|`)
+- Extracted helper methods for readability

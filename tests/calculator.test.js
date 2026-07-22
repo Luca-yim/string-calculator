@@ -63,4 +63,24 @@ test('add("0,1") returns 1 (zero handled correctly)', () => {
   expect(c.add('0,1')).toBe(1);
 });
 
+test('add("//;\\n1;2") returns 3 (custom delimiter)', () => {
+  const c = new Calculator();
+  expect(c.add('//;\n1;2')).toBe(3);
+});
+
+test('add("//|\\n1|2|3") returns 6 (pipe delimiter)', () => {
+  const c = new Calculator();
+  expect(c.add('//|\n1|2|3')).toBe(6);
+});
+
+test('add("//x\\n5x3") returns 8 (letter delimiter)', () => {
+  const c = new Calculator();
+  expect(c.add('//x\n5x3')).toBe(8);
+});
+
+test('add("//.\\n1.2.3") returns 6 (period delimiter)', () => {
+  const c = new Calculator();
+  expect(c.add('//.\n1.2.3')).toBe(6);
+});
+
 runTests();

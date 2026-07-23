@@ -15,3 +15,7 @@ Follows [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://sem
 - Custom delimiter support via `//[delimiter]\n` header
 - Regex-escaping for delimiters (handles special characters like `.` and `|`)
 - Extracted helper methods for readability
+- Rejects negative numbers with error listing all negatives
+- Silently ignores numbers greater than 1000
+- ADR 0001 documenting validation rules and ordering
+- Extracted pipeline helpers: parseNumbers, rejectNegatives, filterLarge, sum

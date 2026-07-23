@@ -1,11 +1,27 @@
 class Calculator {
   add(input) {
-    if (input === '') return 0;
-    const { delimiter, numbersText } = this.parseInput(input);
-    return this.sumNumbers(numbersText, delimiter); 
+     if (input === '') return 0;
+  const { delimiter, numbersText } = this.parseInput(input);
+  const numbers = this.parseNumbers(numbersText, delimiter);
+  this.rejectNegatives(numbers);
+  return numbers.reduce((sum, n) => sum + n, 0);
+  }
+  
+  rejectNegatives(numbers) {
+  const negatives = numbers.filter(n => n < 0);
+  if (negatives.length > 0) {
+    throw new Error(`negatives not allowed: ${negatives.join(', ')}`);
+  }
 }
 
-parseInput(input) {
+  parseNumbers(text, delimiter) {
+  return text.split(delimiter).map(n => {
+    const parsed = parseInt(n);
+    return isNaN(parsed) ? 0 : parsed;
+  });
+}
+
+  parseInput(input) {
     if (input.startsWith('//')) {
       const newlineIndex = input.indexOf('\n');
       const customDelimiter = input.substring(2, newlineIndex);
@@ -16,7 +32,7 @@ parseInput(input) {
     }
     return { delimiter: /[,\n]/, numbersText: input };
   }
-
+  
   sumNumbers(text, delimiter) {
     return text.split(delimiter)
       .map(n => {
@@ -27,8 +43,8 @@ parseInput(input) {
   }
   
   escapeRegex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 }
 
 module.exports = Calculator;

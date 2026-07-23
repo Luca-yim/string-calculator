@@ -28,6 +28,34 @@ Sometimes a requirement is free (R2). Sometimes it's subtly hard (R4's
 period-delimiter case). You never know until you try. TDD's baby-step
 rhythm surfaces both cases with equal ease.
 
+### Deep Concept: Context Boundaries
+
+When data crosses from one interpretation context to another (like
+a string becoming part of a regex, SQL query, HTML, or shell command),
+its meaning can change dangerously.
+
+The classic pattern: user input treated as literal data in one place,
+then as executable code in another.
+
+Real-world examples of the same bug family:
+- SQL injection
+- XSS (cross-site scripting)
+- Command injection
+- Path traversal
+- Regex denial-of-service
+
+The universal fix: escape data for its destination context.
+- Regex → escapeRegex()
+- HTML → escapeHtml()
+- SQL → parameterized queries
+- Shell → argument arrays
+- URL → encodeURIComponent()
+
+The mental habit: whenever I see user input flowing into ANY parser
+or interpreter (regex, SQL, HTML, exec, eval), an alarm goes off:
+"Is this escaped for that context?"
+
+
 ### Tomorrow's Focus
 - Requirements 5-8 (error handling, filtering, more complex delimiters)
 - Push to GitHub earlier this time (Day 1 next project!)

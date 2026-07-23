@@ -83,4 +83,29 @@ test('add("//.\\n1.2.3") returns 6 (period delimiter)', () => {
   expect(c.add('//.\n1.2.3')).toBe(6);
 });
 
+test('add("-1") throws with negative number in message', () => {
+  const c = new Calculator();
+  expect(() => c.add('-1')).toThrow('negatives not allowed: -1');
+});
+
+test('add("-1,-3,-5") lists all negatives in error', () => {
+  const c = new Calculator();
+  expect(() => c.add('-1,-3,-5')).toThrow('negatives not allowed: -1, -3, -5');
+});
+
+test('add("1,-2,3,-4") reports all negatives despite positives', () => {
+  const c = new Calculator();
+  expect(() => c.add('1,-2,3,-4')).toThrow('negatives not allowed: -2, -4');
+});
+
+test('add("//;\\n-1;2;-3") lists negatives with custom delimiter', () => {
+  const c = new Calculator();
+  expect(() => c.add('//;\n-1;2;-3')).toThrow('negatives not allowed: -1, -3');
+});
+
+test('add("-0") returns 0 (negative zero accepted)', () => {
+  const c = new Calculator();
+  expect(c.add('-0')).toBe(0);
+});
+
 runTests();

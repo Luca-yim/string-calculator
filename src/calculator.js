@@ -1,12 +1,16 @@
 class Calculator {
   add(input) {
      if (input === '') return 0;
-  const { delimiter, numbersText } = this.parseInput(input);
-  const numbers = this.parseNumbers(numbersText, delimiter);
-  this.rejectNegatives(numbers);
-  return numbers.reduce((sum, n) => sum + n, 0);
+     const { delimiter, numbersText } = this.parseInput(input);
+     const numbers = this.parseNumbers(numbersText, delimiter);
+     this.rejectNegatives(numbers);
+     return this.sum(this.filterLarge(numbers));
   }
   
+  filterLarge(numbers) {
+  return numbers.filter(n => n <= 1000);
+}
+
   rejectNegatives(numbers) {
   const negatives = numbers.filter(n => n < 0);
   if (negatives.length > 0) {
@@ -19,6 +23,10 @@ class Calculator {
     const parsed = parseInt(n);
     return isNaN(parsed) ? 0 : parsed;
   });
+}
+
+sum(numbers) {
+  return numbers.reduce((total, n) => total + n, 0);
 }
 
   parseInput(input) {

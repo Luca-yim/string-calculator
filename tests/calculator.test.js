@@ -108,4 +108,34 @@ test('add("-0") returns 0 (negative zero accepted)', () => {
   expect(c.add('-0')).toBe(0);
 });
 
+test('add("2,1001") returns 2 (1001 ignored)', () => {
+  const c = new Calculator();
+  expect(c.add('2,1001')).toBe(2);
+});
+
+test('add("2,1000") returns 1002 (1000 included at boundary)', () => {
+  const c = new Calculator();
+  expect(c.add('2,1000')).toBe(1002);
+});
+
+test('add("1,2000,3,4000,5") returns 9 (large numbers ignored)', () => {
+  const c = new Calculator();
+  expect(c.add('1,2000,3,4000,5')).toBe(9);
+});
+
+test('add("1001,2000") returns 0 (all values ignored)', () => {
+  const c = new Calculator();
+  expect(c.add('1001,2000')).toBe(0);
+});
+
+test('add("999999") returns 0 (large ignored)', () => {
+  const c = new Calculator();
+  expect(c.add('999999')).toBe(0);
+});
+
+test('add("-1500") throws (negative check runs before size filter)', () => {
+  const c = new Calculator();
+  expect(() => c.add('-1500')).toThrow('negatives not allowed: -1500');
+});
+
 runTests();

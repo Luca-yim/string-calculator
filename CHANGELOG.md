@@ -19,3 +19,4 @@ Follows [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://sem
 - Silently ignores numbers greater than 1000
 - ADR 0001 documenting validation rules and ordering
 - Extracted pipeline helpers: parseNumbers, rejectNegatives, filterLarge, sum
+- Multi-character delimiter support via `//[delimiter]\n` syntax

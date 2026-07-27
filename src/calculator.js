@@ -29,27 +29,29 @@ sum(numbers) {
   return numbers.reduce((total, n) => total + n, 0);
 }
 
-  parseInput(input) {
-    if (input.startsWith('//')) {
-      const newlineIndex = input.indexOf('\n');
-      const header = input.substring(2, newlineIndex);
-      const numbersText = input.substring(newlineIndex + 1);
-
-      // Check for bracketed multi-char delimiter: [delimiter]
-    let customDelimiter;
-    if (header.startsWith('[') && header.endsWith(']')) {
-      customDelimiter = header.substring(1, header.length - 1);
-    } else {
-      customDelimiter = header;
-    }
-
-      return {
-        delimiter: new RegExp(this.escapeRegex(customDelimiter)),
-        numbersText: numbersText
-      };
-    }
+parseInput(input) {
+  if (!input.startsWith('//')) {
     return { delimiter: /[,\n]/, numbersText: input };
   }
+  const newlineIndex = input.indexOf('\n');
+  const header = input.substring(2, newlineIndex);
+  const numbersText = input.substring(newlineIndex + 1);
+  const delimiter = this.buildDelimiterRegex(header);
+  return { delimiter, numbersText };
+}
+
+buildDelimiterRegex(header) {
+  let delimiters;
+  if (header.startsWith('[')) {
+    const matches = header.match(/\[([^\]]+)\]/g);
+    delimiters = matches.map(m => m.substring(1, m.length - 1));
+  } else {
+    delimiters = [header];
+  }
+  const escaped = delimiters.map(d => this.escapeRegex(d));
+  return new RegExp(escaped.join('|'));
+}
+
   
   sumNumbers(text, delimiter) {
     return text.split(delimiter)

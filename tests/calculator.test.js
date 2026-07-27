@@ -163,4 +163,29 @@ test('add("//[.*]\\n1.*2.*3") returns 6 (regex-special multi-char)', () => {
   expect(c.add('//[.*]\n1.*2.*3')).toBe(6);
 });
 
+test('add("//[*][%]\\n1*2%3") returns 6 (two delimiters)', () => {
+  const c = new Calculator();
+  expect(c.add('//[*][%]\n1*2%3')).toBe(6);
+});
+
+test('add("//[**][%%]\\n1**2%%3") returns 6 (two multi-char delimiters)', () => {
+  const c = new Calculator();
+  expect(c.add('//[**][%%]\n1**2%%3')).toBe(6);
+});
+
+test('add("//[a][b][c]\\n1a2b3c4") returns 10 (three delimiters)', () => {
+  const c = new Calculator();
+  expect(c.add('//[a][b][c]\n1a2b3c4')).toBe(10);
+});
+
+test('add("//;\\n1;2") still works after multi-delimiter support', () => {
+  const c = new Calculator();
+  expect(c.add('//;\n1;2')).toBe(3);
+});
+
+test('add("1,2,3") still works with no header', () => {
+  const c = new Calculator();
+  expect(c.add('1,2,3')).toBe(6);
+});
+
 runTests();

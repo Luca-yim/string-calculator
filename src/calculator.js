@@ -32,10 +32,20 @@ sum(numbers) {
   parseInput(input) {
     if (input.startsWith('//')) {
       const newlineIndex = input.indexOf('\n');
-      const customDelimiter = input.substring(2, newlineIndex);
+      const header = input.substring(2, newlineIndex);
+      const numbersText = input.substring(newlineIndex + 1);
+
+      // Check for bracketed multi-char delimiter: [delimiter]
+    let customDelimiter;
+    if (header.startsWith('[') && header.endsWith(']')) {
+      customDelimiter = header.substring(1, header.length - 1);
+    } else {
+      customDelimiter = header;
+    }
+
       return {
         delimiter: new RegExp(this.escapeRegex(customDelimiter)),
-        numbersText: input.substring(newlineIndex + 1)
+        numbersText: numbersText
       };
     }
     return { delimiter: /[,\n]/, numbersText: input };

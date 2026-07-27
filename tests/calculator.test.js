@@ -138,4 +138,29 @@ test('add("-1500") throws (negative check runs before size filter)', () => {
   expect(() => c.add('-1500')).toThrow('negatives not allowed: -1500');
 });
 
+test('add("//[***]\\n1***2***3") returns 6 (multi-char delimiter)', () => {
+  const c = new Calculator();
+  expect(c.add('//[***]\n1***2***3')).toBe(6);
+});
+
+test('add("//[abc]\\n1abc2abc3") returns 6', () => {
+  const c = new Calculator();
+  expect(c.add('//[abc]\n1abc2abc3')).toBe(6);
+});
+
+test('add("//[;]\\n1;2;3") returns 6 (bracketed single-char)', () => {
+  const c = new Calculator();
+  expect(c.add('//[;]\n1;2;3')).toBe(6);
+});
+
+test('add("//;\\n1;2;3") returns 6 (unbracketed single-char)', () => {
+  const c = new Calculator();
+  expect(c.add('//;\n1;2;3')).toBe(6);
+});
+
+test('add("//[.*]\\n1.*2.*3") returns 6 (regex-special multi-char)', () => {
+  const c = new Calculator();
+  expect(c.add('//[.*]\n1.*2.*3')).toBe(6);
+});
+
 runTests();

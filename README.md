@@ -34,3 +34,12 @@ const c = new Calculator();
 
 c.add("1,2,3"); // 6
 c.add("//;\n1;2;3"); // 6
+
+
+## Usage (CLI)
+
+node bin/calc.js "1,2"          # 3
+node bin/calc.js "1
+2,3"                         # 6  (use a real newline)
+node bin/calc.js "//;\n1;2;3"  # 6  (use a real newline)
+

@@ -20,3 +20,6 @@ Follows [Keep a Changelog](https://keepachangelog.com/) and [SemVer](https://sem
 - ADR 0001 documenting validation rules and ordering
 - Extracted pipeline helpers: parseNumbers, rejectNegatives, filterLarge, sum
 - Multi-character delimiter support via `//[delimiter]\n` syntax
+- Multiple delimiter support via `//[a][b][c]\n` syntax
+- Extracted buildDelimiterRegex helper
+- Future ideas log documenting deferred features

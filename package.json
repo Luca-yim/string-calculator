@@ -6,8 +6,12 @@
     "doc": "docs",
     "test": "tests"
   },
+    "bin": {
+    "calc": "./bin/calc.js"
+  },
   "scripts": {
-    "test": "node tests/calculator.test.js"
+    "test": "node tests/calculator.test.js && node tests/cli.test.js",
+    "test:cli": "node tests/cli.test.js"
   },
   "keywords": [],
   "author": "",

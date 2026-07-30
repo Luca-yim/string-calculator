@@ -51,16 +51,6 @@ buildDelimiterRegex(header) {
   const escaped = delimiters.map(d => this.escapeRegex(d));
   return new RegExp(escaped.join('|'));
 }
-
-  
-  sumNumbers(text, delimiter) {
-    return text.split(delimiter)
-      .map(n => {
-        const parsed = parseInt(n);
-        return isNaN(parsed) ? 0 : parsed;
-      })
-      .reduce((sum, n) => sum + n, 0);
-  }
   
   escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

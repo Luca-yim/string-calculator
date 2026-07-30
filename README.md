@@ -43,6 +43,9 @@ node bin/calc.js "1
 2,3"                         # 6  (use a real newline)
 node bin/calc.js "//;\n1;2;3"  # 6  (use a real newline)
 
+<<<<<<< HEAD
 Built with progressive TDD: each requirement was implemented only when tests demanded it.
 Includes unit + CLI integration tests to verify behavior end-to-end.
 
+=======
+>>>>>>> a55326d8c2ec5adcba5c0db3b0a3b879ee190372
